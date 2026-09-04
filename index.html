@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelagem Matemática e Programação | Criptografia RSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Documentação &bull; Matemática II &bull; Alura</span>
+            <h1>Modelagem Matemática e Programação</h1>
+            <p>O Uso de Algoritmos na Inovação Tecnológica: Criptografia e Segurança de Dados</p>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- SEÇÃO 1: INTRODUÇÃO DO TRABALHO -->
+        <section class="card">
+            <h2>1. Introdução do Trabalho</h2>
+            <p class="lead">
+                A era digital moderna é sustentada por uma base invisível, porém robusta:
+                a união entre a matemática e a programação.
+            </p>
+
+            <div class="grid-2">
+                <div>
+                    <h3>Contextualização</h3>
+                    <p>
+                        Conceitos matemáticos como números primos, fatoração, máximo divisor
+                        comum, congruência e aritmética modular deixaram de ser apenas teorias
+                        acadêmicas para se tornarem fundamentais em tecnologias como criptografia,
+                        segurança de dados e proteção de informações digitais.
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Objetivo</h3>
+                    <p>
+                        Demonstrar a aplicação prática de conceitos de Matemática II por meio
+                        de um algoritmo desenvolvido em JavaScript, utilizando uma versão
+                        didática da criptografia RSA para mostrar como a matemática pode ser
+                        utilizada na proteção de informações.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SEÇÃO 2: EXPLICAÇÃO DE COMO O SITE FOI FEITO -->
+        <section class="card">
+            <h2>2. Explicação da Atividade: Como o Site Foi Desenvolvido</h2>
+
+            <p>
+                Para transformar a proposta teórica em um projeto funcional, interativo e
+                visualmente moderno, a atividade foi estruturada utilizando os padrões
+                fundamentais da web separados em dois arquivos principais:
+            </p>
+
+            <div class="theory-grid" style="margin-top: 1.5rem;">
+
+                <div class="theory-item">
+                    <div class="theory-icon">📄</div>
+
+                    <h4>O Arquivo `index.html`</h4>
+
+                    <p>
+                        Atua como o esqueleto e a semântica da página. Ele organiza o conteúdo
+                        textual em blocos lógicos (`<header>`, `<main>`, `<section>`) e estrutura
+                        o painel interativo com campos numéricos e botões para executar a
+                        criptografia RSA.
+                    </p>
+                </div>
+
+                <div class="theory-item">
+                    <div class="theory-icon">🎨</div>
+
+                    <h4>O Arquivo `style.css`</h4>
+
+                    <p>
+                        Controla toda a identidade visual, tipografia e responsividade. Utiliza
+                        variáveis globais, flexbox/grid e efeitos de transição para garantir
+                        uma experiência limpa, moderna e adaptável a diferentes tamanhos de tela.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="info-box" style="margin-top: 2rem;">
+
+                <h4>Arquitetura Lógica (JavaScript Embutido):</h4>
+
+                <p>
+                    O script captura os parâmetros de entrada do usuário, verifica os números
+                    primos, calcula o módulo e a função totiente de Euler, encontra o inverso
+                    modular e utiliza operações de exponenciação modular para realizar a
+                    criptografia e a descriptografia da mensagem.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- SEÇÃO 3: LABORATÓRIO PRÁTICO -->
+        <section class="card">
+
+            <h2>3. Laboratório Prático de Criptografia RSA</h2>
+
+            <p>
+                Teste o algoritmo desenvolvido para este trabalho diretamente no navegador:
+            </p>
+
+            <div class="interactive-panel">
+
+                <div class="controls-grid">
+
+                    <div class="control-group">
+                        <label for="p">Primeiro Número Primo (P):</label>
+                        <input type="number" id="p" value="5" min="2">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="q">Segundo Número Primo (Q):</label>
+                        <input type="number" id="q" value="11" min="2">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="e">Expoente da Chave Pública (E):</label>
+                        <input type="number" id="e" value="7" min="2">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="mensagem">Mensagem Numérica:</label>
+                        <input type="number" id="mensagem" value="2" min="1">
+                    </div>
+
+                </div>
+
+                <button id="btn-simular" class="btn-primary">
+                    Executar Criptografia RSA
+                </button>
+
+                <div id="resultado-container" class="result-box hidden">
+
+                    <h4>Resultados da Criptografia:</h4>
+
+                    <div id="resultado-texto"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                Trabalho Acadêmico de Matemática II &bull;
+                Documentação e Aplicação Web
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        // Calcula o Máximo Divisor Comum (MDC)
+        function mdc(a, b) {
+
+            while (b !== 0) {
+
+                let resto = a % b;
+
+                a = b;
+                b = resto;
+
+            }
+
+            return a;
+        }
+
+
+        // Verifica se um número é primo
+        function ehPrimo(numero) {
+
+            if (numero < 2) {
+                return false;
+            }
+
+            for (let i = 2; i <= Math.sqrt(numero); i++) {
+
+                if (numero % i === 0) {
+                    return false;
+                }
+
+            }
+
+            return true;
+        }
+
+
+        // Calcula potência modular
+        function potenciaModular(base, expoente, modulo) {
+
+            let resultado = 1;
+
+            base = base % modulo;
+
+            for (let i = 0; i < expoente; i++) {
+
+                resultado = (resultado * base) % modulo;
+
+            }
+
+            return resultado;
+        }
+
+
+        // Encontra o inverso modular de E em relação a Phi
+        function encontrarD(e, phi) {
+
+            for (let d = 1; d < phi; d++) {
+
+                if ((e * d) % phi === 1) {
+
+                    return d;
+
+                }
+
+            }
+
+            return null;
+        }
+
+
+        document.getElementById('btn-simular').addEventListener('click', function() {
+
+            const p = parseInt(document.getElementById('p').value);
+            const q = parseInt(document.getElementById('q').value);
+            const e = parseInt(document.getElementById('e').value);
+            const mensagem = parseInt(document.getElementById('mensagem').value);
+
+            const container = document.getElementById('resultado-container');
+            const textoDiv = document.getElementById('resultado-texto');
+
+            let htmlOutput = "";
+
+
+            // Verifica se os números foram preenchidos
+            if (!p || !q || !e || !mensagem) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        Preencha todos os campos corretamente.
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Verifica se P e Q são primos
+            if (!ehPrimo(p) || !ehPrimo(q)) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        Os valores P e Q precisam ser números primos.
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Verifica se P e Q são diferentes
+            if (p === q) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        Os números P e Q precisam ser diferentes.
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Calcula N
+            const n = p * q;
+
+
+            // Calcula a função totiente de Euler
+            const phi = (p - 1) * (q - 1);
+
+
+            // Verifica se a mensagem é válida
+            if (mensagem >= n) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        A mensagem deve ser menor que N (${n}).
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Verifica se E e Phi são coprimos
+            if (mdc(e, phi) !== 1) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        O valor de E precisa ser relativamente primo com
+                        φ(N). Neste caso, MDC(${e}, ${phi}) ≠ 1.
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Encontra D
+            const d = encontrarD(e, phi);
+
+
+            if (d === null) {
+
+                htmlOutput = `
+                    <p class="alert-text">
+                        ⚠️ <strong>Erro:</strong>
+                        Não foi possível encontrar o inverso modular.
+                    </p>
+                `;
+
+                textoDiv.innerHTML = htmlOutput;
+                container.classList.remove('hidden');
+
+                return;
+            }
+
+
+            // Criptografa a mensagem
+            const mensagemCriptografada =
+                potenciaModular(mensagem, e, n);
+
+
+            // Descriptografa a mensagem
+            const mensagemRecuperada =
+                potenciaModular(mensagemCriptografada, d, n);
+
+
+            htmlOutput = `
+                <p>
+                    <strong>Valores utilizados:</strong>
+                </p>
+
+                <ul>
+
+                    <li>
+                        <strong>P:</strong> ${p}
+                    </li>
+
+                    <li>
+                        <strong>Q:</strong> ${q}
+                    </li>
+
+                    <li>
+                        <strong>N = P × Q:</strong> ${n}
+                    </li>
+
+                    <li>
+                        <strong>φ(N):</strong> ${phi}
+                    </li>
+
+                    <li>
+                        <strong>Chave Pública:</strong> (${e}, ${n})
+                    </li>
+
+                    <li>
+                        <strong>Chave Privada:</strong> (${d}, ${n})
+                    </li>
+
+                </ul>
+
+
+                <p>
+                    <strong>Processo de Criptografia:</strong>
+                </p>
+
+                <p>
+                    ${mensagem}<sup>${e}</sup> mod ${n}
+                    =
+                    <strong>${mensagemCriptografada}</strong>
+                </p>
+
+
+                <p>
+                    <strong>Mensagem Original:</strong>
+                    ${mensagem}
+                </p>
+
+                <p>
+                    <strong>Mensagem Criptografada:</strong>
+                    ${mensagemCriptografada}
+                </p>
+
+                <p>
+                    <strong>Mensagem Recuperada:</strong>
+                    ${mensagemRecuperada}
+                </p>
+
+
+                <p class="success-text">
+                    ✅ <strong>Criptografia concluída:</strong>
+                    a mensagem foi criptografada e posteriormente
+                    recuperada com sucesso.
+                </p>
+            `;
+
+
+            textoDiv.innerHTML = htmlOutput;
+
+            container.classList.remove('hidden');
+
+        });
+
+    </script>
+
+</body>
+</html>
