@@ -75,40 +75,40 @@
                 <div class="theory-item">
                     <div class="theory-icon">📄</div>
 
-                    <h4>O Arquivo `index.html`</h4>
+                    <h4>O Arquivo JavaScript</h4>
 
                     <p>
-                        Atua como o esqueleto e a semântica da página. Ele organiza o conteúdo
-                        textual em blocos lógicos (`<header>`, `<main>`, `<section>`) e estrutura
-                        o painel interativo com campos numéricos e botões para executar a
-                        criptografia RSA.
+                       Após estabelecer o modelo matemático, as operações serão transformadas em funções JavaScript. O programa será responsável por: receber os números primos; calcular n; calcular φ(n); selecionar o expoente público; encontrar o expoente privado; criptografar um número;
+descriptografar o resultado; apresentar os valores no console.
+
                     </p>
                 </div>
 
                 <div class="theory-item">
                     <div class="theory-icon">🎨</div>
 
-                    <h4>O Arquivo `style.css`</h4>
+                    <h4>O Arquivo style.css</h4>
 
                     <p>
                         Controla toda a identidade visual, tipografia e responsividade. Utiliza
                         variáveis globais, flexbox/grid e efeitos de transição para garantir
                         uma experiência limpa, moderna e adaptável a diferentes tamanhos de tela.
                     </p>
-                </div>
+               
+                 <div class="info-box" style="margin-top: 2rem;">
+                <h4>Teste</h4>
+                <p>Após a implementação, serão realizados testes utilizando diferentes valores de mensagem. O objetivo será verificar se: • • • • • • 1. 2. 3. 4. 5. 6. 7. 8. Mensagem original = Mensagem após descriptografia Quando essa igualdade ocorrer , será possível confirmar que o 
+processo implementado está funcionando corretamente para o exemplo utilizado.</p>
+        
 
             </div>
 
             <div class="info-box" style="margin-top: 2rem;">
 
-                <h4>Arquitetura Lógica (JavaScript Embutido):</h4>
 
-                <p>
-                    O script captura os parâmetros de entrada do usuário, verifica os números
-                    primos, calcula o módulo e a função totiente de Euler, encontra o inverso
-                    modular e utiliza operações de exponenciação modular para realizar a
-                    criptografia e a descriptografia da mensagem.
-                </p>
+                
+                    
+        
 
             </div>
         </section>
@@ -125,347 +125,191 @@
 
             <div class="interactive-panel">
 
-                <div class="controls-grid">
+                <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Criptografia RSA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-                    <div class="control-group">
-                        <label for="p">Primeiro Número Primo (P):</label>
-                        <input type="number" id="p" value="5" min="2">
-                    </div>
+<body>
 
-                    <div class="control-group">
-                        <label for="q">Segundo Número Primo (Q):</label>
-                        <input type="number" id="q" value="11" min="2">
-                    </div>
+    <main class="container">
 
-                    <div class="control-group">
-                        <label for="e">Expoente da Chave Pública (E):</label>
-                        <input type="number" id="e" value="7" min="2">
-                    </div>
+        <h1>Simulação de Criptografia RSA</h1>
 
-                    <div class="control-group">
-                        <label for="mensagem">Mensagem Numérica:</label>
-                        <input type="number" id="mensagem" value="2" min="1">
-                    </div>
+        <p class="descricao">
+            Teste o algoritmo desenvolvido para este trabalho diretamente no navegador.
+            Esta é uma simulação didática inspirada no funcionamento do RSA.
+        </p>
 
-                </div>
+        <section class="explicacao">
+            <h2>Como funciona?</h2>
 
-                <button id="btn-simular" class="btn-primary">
-                    Executar Criptografia RSA
-                </button>
+            <p>
+                O RSA utiliza dois números primos para criar uma chave pública
+                e uma chave privada.
+            </p>
 
-                <div id="resultado-container" class="result-box hidden">
+            <p>
+                Neste exemplo: <strong>p = 5</strong>,
+                <strong>q = 11</strong>,
+                <strong>n = 55</strong>,
+                <strong>φ(n) = 40</strong>,
+                <strong>e = 7</strong> e
+                <strong>d = 23</strong>.
+            </p>
+        </section>
 
-                    <h4>Resultados da Criptografia:</h4>
+        <section class="teste">
 
-                    <div id="resultado-texto"></div>
+            <h2>Teste o algoritmo</h2>
 
-                </div>
+            <label for="mensagem">
+                Digite um número para representar a mensagem:
+            </label>
 
-            </div>
+            <input
+                type="number"
+                id="mensagem"
+                min="1"
+                max="54"
+                value="2"
+            >
+
+            <button onclick="executarRSA()">
+                Criptografar e Descriptografar
+            </button>
+
+            <div id="resultado" class="resultado"></div>
 
         </section>
 
+        <section class="resumo">
+
+            <h2>Principais conceitos</h2>
+
+            <ul>
+                <li>Números primos</li>
+                <li>Fatoração</li>
+                <li>Máximo Divisor Comum (MDC)</li>
+                <li>Aritmética modular</li>
+                <li>Função totiente de Euler</li>
+                <li>Chave pública e chave privada</li>
+            </ul>
+
+        </section>
+
+        <p class="aviso">
+            Esta aplicação possui finalidade educacional e utiliza números pequenos.
+            Não deve ser utilizada para proteger informações reais ou sensíveis.
+        </p>
+
     </main>
-
-
-    <footer>
-
-        <div class="container">
-
-            <p>
-                Trabalho Acadêmico de Matemática II &bull;
-                Documentação e Aplicação Web
-            </p>
-
-        </div>
-
-    </footer>
-
 
     <script>
 
-        // Calcula o Máximo Divisor Comum (MDC)
+        // Calcula o Máximo Divisor Comum
         function mdc(a, b) {
-
             while (b !== 0) {
-
                 let resto = a % b;
-
                 a = b;
                 b = resto;
-
             }
 
             return a;
         }
 
-
-        // Verifica se um número é primo
-        function ehPrimo(numero) {
-
-            if (numero < 2) {
-                return false;
-            }
-
-            for (let i = 2; i <= Math.sqrt(numero); i++) {
-
-                if (numero % i === 0) {
-                    return false;
-                }
-
-            }
-
-            return true;
-        }
-
-
-        // Calcula potência modular
+        // Calcula a potência modular
         function potenciaModular(base, expoente, modulo) {
-
             let resultado = 1;
 
-            base = base % modulo;
-
             for (let i = 0; i < expoente; i++) {
-
                 resultado = (resultado * base) % modulo;
-
             }
 
             return resultado;
         }
 
-
-        // Encontra o inverso modular de E em relação a Phi
+        // Encontra o expoente privado
         function encontrarD(e, phi) {
+            let d = 1;
 
-            for (let d = 1; d < phi; d++) {
-
-                if ((e * d) % phi === 1) {
-
-                    return d;
-
-                }
-
+            while ((e * d) % phi !== 1) {
+                d++;
             }
 
-            return null;
+            return d;
         }
 
+        // Criptografa a mensagem
+        function criptografar(mensagem, e, n) {
+            return potenciaModular(mensagem, e, n);
+        }
 
-        document.getElementById('btn-simular').addEventListener('click', function() {
+        // Descriptografa a mensagem
+        function descriptografar(cifrado, d, n) {
+            return potenciaModular(cifrado, d, n);
+        }
 
-            const p = parseInt(document.getElementById('p').value);
-            const q = parseInt(document.getElementById('q').value);
-            const e = parseInt(document.getElementById('e').value);
-            const mensagem = parseInt(document.getElementById('mensagem').value);
+        function executarRSA() {
 
-            const container = document.getElementById('resultado-container');
-            const textoDiv = document.getElementById('resultado-texto');
+            const mensagem = Number(
+                document.getElementById("mensagem").value
+            );
 
-            let htmlOutput = "";
+            // Valores utilizados no exemplo do trabalho
+            const p = 5;
+            const q = 11;
 
-
-            // Verifica se os números foram preenchidos
-            if (!p || !q || !e || !mensagem) {
-
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        Preencha todos os campos corretamente.
-                    </p>
-                `;
-
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
-
-                return;
-            }
-
-
-            // Verifica se P e Q são primos
-            if (!ehPrimo(p) || !ehPrimo(q)) {
-
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        Os valores P e Q precisam ser números primos.
-                    </p>
-                `;
-
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
-
-                return;
-            }
-
-
-            // Verifica se P e Q são diferentes
-            if (p === q) {
-
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        Os números P e Q precisam ser diferentes.
-                    </p>
-                `;
-
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
-
-                return;
-            }
-
-
-            // Calcula N
             const n = p * q;
-
-
-            // Calcula a função totiente de Euler
             const phi = (p - 1) * (q - 1);
 
+            const e = 7;
 
-            // Verifica se a mensagem é válida
-            if (mensagem >= n) {
-
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        A mensagem deve ser menor que N (${n}).
-                    </p>
-                `;
-
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
-
-                return;
-            }
-
-
-            // Verifica se E e Phi são coprimos
             if (mdc(e, phi) !== 1) {
-
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        O valor de E precisa ser relativamente primo com
-                        φ(N). Neste caso, MDC(${e}, ${phi}) ≠ 1.
-                    </p>
-                `;
-
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
-
+                document.getElementById("resultado").innerHTML =
+                    "<p>O valor de e não é adequado.</p>";
                 return;
             }
 
-
-            // Encontra D
             const d = encontrarD(e, phi);
 
+            const cifrado = criptografar(mensagem, e, n);
+            const original = descriptografar(cifrado, d, n);
 
-            if (d === null) {
+            document.getElementById("resultado").innerHTML = `
+                <h3>Resultado</h3>
 
-                htmlOutput = `
-                    <p class="alert-text">
-                        ⚠️ <strong>Erro:</strong>
-                        Não foi possível encontrar o inverso modular.
-                    </p>
-                `;
+                <p><strong>Mensagem original:</strong> ${mensagem}</p>
 
-                textoDiv.innerHTML = htmlOutput;
-                container.classList.remove('hidden');
+                <p><strong>Mensagem criptografada:</strong> ${cifrado}</p>
 
-                return;
-            }
+                <p><strong>Mensagem descriptografada:</strong> ${original}</p>
 
+                <hr>
 
-            // Criptografa a mensagem
-            const mensagemCriptografada =
-                potenciaModular(mensagem, e, n);
+                <p><strong>Chave pública:</strong> (${n}, ${e})</p>
 
+                <p><strong>Chave privada:</strong> (${n}, ${d})</p>
 
-            // Descriptografa a mensagem
-            const mensagemRecuperada =
-                potenciaModular(mensagemCriptografada, d, n);
-
-
-            htmlOutput = `
-                <p>
-                    <strong>Valores utilizados:</strong>
-                </p>
-
-                <ul>
-
-                    <li>
-                        <strong>P:</strong> ${p}
-                    </li>
-
-                    <li>
-                        <strong>Q:</strong> ${q}
-                    </li>
-
-                    <li>
-                        <strong>N = P × Q:</strong> ${n}
-                    </li>
-
-                    <li>
-                        <strong>φ(N):</strong> ${phi}
-                    </li>
-
-                    <li>
-                        <strong>Chave Pública:</strong> (${e}, ${n})
-                    </li>
-
-                    <li>
-                        <strong>Chave Privada:</strong> (${d}, ${n})
-                    </li>
-
-                </ul>
-
-
-                <p>
-                    <strong>Processo de Criptografia:</strong>
-                </p>
-
-                <p>
-                    ${mensagem}<sup>${e}</sup> mod ${n}
-                    =
-                    <strong>${mensagemCriptografada}</strong>
-                </p>
-
-
-                <p>
-                    <strong>Mensagem Original:</strong>
-                    ${mensagem}
-                </p>
-
-                <p>
-                    <strong>Mensagem Criptografada:</strong>
-                    ${mensagemCriptografada}
-                </p>
-
-                <p>
-                    <strong>Mensagem Recuperada:</strong>
-                    ${mensagemRecuperada}
-                </p>
-
-
-                <p class="success-text">
-                    ✅ <strong>Criptografia concluída:</strong>
-                    a mensagem foi criptografada e posteriormente
-                    recuperada com sucesso.
+                <p><strong>Resultado do teste:</strong>
+                    ${mensagem === original
+                        ? "Algoritmo funcionando corretamente!"
+                        : "Ocorreu um erro."
+                    }
                 </p>
             `;
-
-
-            textoDiv.innerHTML = htmlOutput;
-
-            container.classList.remove('hidden');
-
-        });
+        }
 
     </script>
+
+</body>
+</html>
+
+    
 
 </body>
 </html>
